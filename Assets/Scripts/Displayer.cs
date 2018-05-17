@@ -5,24 +5,50 @@ using Zenject;
 
 public class Displayer : MonoBehaviour
 {
+	// ============== NON MONOBEHAVIOUR
+	// field injection
 	[Inject]
-	ClassC _classCInjected;										// field injection
+	ClassC _classCInjected;
 
+	// property injection
 	[Inject]
-	ClassC _classCInjectedProperty { get; set; }				// property injection
+	ClassC _classCInjectedProperty { get; set; }
 
-	ClassC _classC;
+	// method injection
+	ClassC _classC;												
+	[Inject]
+	private void ClassCInjectedMethod(ClassC classC)			
+	{
+		_classC = classC;
+	}
+
+	// ============== MONOBEHAVIOUR
+	// field injection
+	[Inject]
+	ClassB _classBInjected;
+
+	// property injection
+	[Inject]
+	ClassB _classBInjectedProperty { get; set; }
+
+	// method injection
+	ClassB _classB;
+	[Inject]
+	private void ClassBInjectionMethod(ClassB classB)
+	{
+		_classB = classB;
+	}
+
+	//======================
 
 	private void Start()
 	{
-		_classC.DisplayCNoDependencies();
-		_classCInjected.DisplayCNoDependencies();
-		_classCInjectedProperty.DisplayCNoDependencies();
-	}
+		//_classC.DisplayC();
+		//_classCInjected.DisplayC();
+		//_classCInjectedProperty.DisplayC();
 
-	[Inject]
-	private void ClassCInjectedMethod(ClassC classC)			// method injection
-	{
-		_classC = classC;
+		_classBInjected.DisplayB();
+		_classBInjectedProperty.DisplayB();
+		_classBInjectedProperty.DisplayB();
 	}
 }

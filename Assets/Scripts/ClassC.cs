@@ -5,14 +5,18 @@ using Zenject;
 
 public class ClassC
 {
-	public ClassC(ClassD classD)                        // non-monobehaviour constructor injection
+	private DisplayerSignal _onClassCDisplayedNMB;										// non-monobehaviour signal
+
+	public ClassC(ClassD classD, DisplayerSignal onClassCDisplayed)                        // non-monobehaviour constructor injection
 	{
 		classD.DisplayDInfo();
+		_onClassCDisplayedNMB = onClassCDisplayed;
 	}
 	
-	public void DisplayCNoDependencies()
+	public void DisplayC()
 	{
-		Debug.Log("What ClassC displays without dependencies.");
+		Debug.Log("What ClassC displays.");
+		_onClassCDisplayedNMB.Fire();
 	}
 }
 
